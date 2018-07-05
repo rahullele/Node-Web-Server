@@ -1,7 +1,7 @@
 const express=require('express');
 const hbs=require('hbs');
 const fs= require('fs');
-
+const port=process.env.PORT || 3000; //stores all your environment variables as key value pairs
 var app=express();
 
 //views is the default directory express uses for templates
@@ -21,9 +21,9 @@ fs.appendFile('server.log',log+'\n',(err)=>{
 next(); //if this next() method is not executed, nothing can be seen in the browser
 });
 
-app.use((req,res,next)=>{
-res.render('maintenance.hbs');
-});
+// app.use((req,res,next)=>{
+// res.render('maintenance.hbs');
+// });
 
 app.use(express.static(__dirname+'/public'));
 hbs.registerPartials(__dirname+'/views/partials');
@@ -59,6 +59,6 @@ app.get('/bad',(req,res)=>{
 });
 // /
 
-app.listen(3000,()=>{
-  console.log('Server is up on port 3000');
+app.listen(port,()=>{
+  console.log(`Server is up on port ${port}`);
 });
